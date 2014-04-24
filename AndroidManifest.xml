@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nju.edu.menu2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="nju.edu.menu2.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.AddMenu"
+            android:label="@string/add_name" 
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            > 
+               
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.BeginWork"
+            android:label="@string/beginwork_name" >
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.Lay1Activity"
+            android:label="@string/Lay1Activity_name" >
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.Lay2Activity"
+            android:label="@string/Lay2Activity_name" >
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.Lay3Activity"
+            android:label="@string/Lay3Activity_name" >
+        </activity>
+        <activity
+            android:name="nju.edu.menu2.ShowDetail"
+            android:label="@string/ShowDetail_name" >
+        </activity>
+        
+        <activity
+            android:name="nju.edu.menu2.CameraActivity"
+            android:label="@string/camera_name" >
+        </activity>
+    </application>
+
+</manifest>
