@@ -52,6 +52,7 @@ public class CameraActivity extends Activity {
 				b = new FileOutputStream(fileName);
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
 			} catch (FileNotFoundException e) {
+				Log.e("错误", "没找到");
 				e.printStackTrace();
 			} finally {
 				try {
