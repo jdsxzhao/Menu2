@@ -3,11 +3,14 @@ package nju.edu.menu2;
 import java.util.ArrayList;
 
 
+
+
 import nju.edu.menu2.MainActivity.ButtonListener;
 import nju.edu.menu2.MainActivity.TextViewListener;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
@@ -18,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.WebView.FindListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,12 +38,31 @@ public class AddMenu extends ActionBarActivity{
 	LinearLayout rlLayout;
 	private TextView confirmTV;
 	private ImageView cameraImageView;
+	Bitmap bitmap;
+	ImageView imageView;
+//	public static String name = "";
+//	public static String material = "";
+//	
+//	
+//	public ImageView pic;
+	
 	
 	 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_main2);
 		rlLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.add_main2, null);  
+		Intent intent = getIntent();
+		String name = intent.getStringExtra("name");
+		String material = intent.getStringExtra("material");
+		  bitmap=intent.getParcelableExtra("bitmap");
+		  imageView = (ImageView) findViewById(R.id.pic);
+          imageView.setImageBitmap(bitmap);
+		
+		EditText editText1 = (EditText) findViewById(R.id.editText1);
+		editText1.setText(name);
+		EditText editText2 = (EditText) findViewById(R.id.editText2);
+		editText2	.setText(material);
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		String[] itemsStrings = getResources().getStringArray(R.array.type_array);
 		ArrayAdapter<String> _Adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,itemsStrings);
@@ -95,12 +118,25 @@ public class AddMenu extends ActionBarActivity{
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+			String name = ((EditText) findViewById(R.id.editText1)).getText().toString();
+			String material = ((EditText) findViewById(R.id.editText2)).getText().toString();	
 			Intent intent = new Intent();
-            intent.setClass(AddMenu.this, CameraActivity.class);
+			intent.setClass(AddMenu.this, CameraActivity.class);
+			Bundle bundle=new Bundle();  
+            bundle.putString("name", name);  
+            bundle.putString("material",material);  
+            intent.putExtras(bundle);  
+			
             startActivity(intent);
 		}
 		
 	}
+	
+	
+//	public void setPic(Bitmap bitmap){
+//		pic = (ImageView) findViewById(R.id.pic);
+//		pic.setImageBitmap(bitmap);
+//	}
 	
 	
 	ArrayList<RelativeLayout.LayoutParams> lps = new ArrayList<>();

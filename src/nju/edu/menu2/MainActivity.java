@@ -54,6 +54,11 @@ public class MainActivity extends ActionBarActivity {
 			// TODO Auto-generated method stub
 			Intent intent=new Intent();
 			intent.setClass(MainActivity.this, AddMenu.class);
+			
+			Bundle bundle=new Bundle();  
+            bundle.putString("name", "");  
+            bundle.putString("material","");  
+            intent.putExtras(bundle); 
 			startActivity(intent);
 //			MainActivity.this.finish();
 		}
