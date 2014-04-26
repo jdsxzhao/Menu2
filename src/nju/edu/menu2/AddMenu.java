@@ -1,17 +1,21 @@
 package nju.edu.menu2;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
-
-
-
 
 import nju.edu.menu2.MainActivity.ButtonListener;
 import nju.edu.menu2.MainActivity.TextViewListener;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.support.v7.app.ActionBarActivity;
@@ -31,20 +35,27 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddMenu extends ActionBarActivity{
 
 
 	LinearLayout rlLayout;
 	private TextView confirmTV;
+	private TextView cancelTV;
 	private ImageView cameraImageView;
 	Bitmap bitmap;
 	ImageView imageView;
+	Spinner spinner;
+	EditText editText1;
+	EditText editText2;
 //	public static String name = "";
 //	public static String material = "";
 //	
 //	
 //	public ImageView pic;
+	
+	public static boolean isloadPic = false ;
 	
 	
 	 
@@ -55,22 +66,31 @@ public class AddMenu extends ActionBarActivity{
 		Intent intent = getIntent();
 		String name = intent.getStringExtra("name");
 		String material = intent.getStringExtra("material");
-		  bitmap=intent.getParcelableExtra("bitmap");
-		  imageView = (ImageView) findViewById(R.id.pic);
-          imageView.setImageBitmap(bitmap);
+		imageView = (ImageView) findViewById(R.id.pic);
+		if (isloadPic) {
+			bitmap=intent.getParcelableExtra("bitmap");
+			imageView.setImageBitmap(bitmap);
+			
+		}
 		
-		EditText editText1 = (EditText) findViewById(R.id.editText1);
+		editText1 = (EditText) findViewById(R.id.editText1);
 		editText1.setText(name);
-		EditText editText2 = (EditText) findViewById(R.id.editText2);
+		editText2 = (EditText) findViewById(R.id.editText2);
 		editText2	.setText(material);
-		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		spinner = (Spinner) findViewById(R.id.spinner1);
 		String[] itemsStrings = getResources().getStringArray(R.array.type_array);
 		ArrayAdapter<String> _Adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,itemsStrings);
 		spinner.setAdapter(_Adapter);
+		spinner.setSelection(intent.getIntExtra("type", 0), true);
+		
 
 		confirmTV=(TextView)findViewById(R.id.textView5);
 		TVOnClickListener confirmListener=new TVOnClickListener();
 		confirmTV.setOnClickListener(confirmListener);
+		
+		
+		cancelTV = (TextView)findViewById(R.id.textView4);
+		cancelTV.setOnClickListener(new CancelListener());
 		
 		
 		cameraImageView = (ImageView)findViewById(R.id.camera);
@@ -108,9 +128,28 @@ public class AddMenu extends ActionBarActivity{
 			.show();
 			
 			
+			save();
+			AddMenu.this.finish();
+			
+			
 		}
 	
 		
+	}
+	
+	
+	class CancelListener implements OnClickListener{
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			
+			Intent intent = new Intent();
+			intent.setClass(AddMenu.this, MainActivity.class);
+			startActivity(intent);
+			AddMenu.this.finish();
+			
+			
+		}
 	}
 	
 	class CameraListener implements OnClickListener{
@@ -120,14 +159,17 @@ public class AddMenu extends ActionBarActivity{
 			// TODO Auto-generated method stub
 			String name = ((EditText) findViewById(R.id.editText1)).getText().toString();
 			String material = ((EditText) findViewById(R.id.editText2)).getText().toString();	
+			int pos = spinner.getSelectedItemPosition();
 			Intent intent = new Intent();
 			intent.setClass(AddMenu.this, CameraActivity.class);
 			Bundle bundle=new Bundle();  
             bundle.putString("name", name);  
-            bundle.putString("material",material);  
+            bundle.putString("material",material); 
+            bundle.putInt("type", pos);
             intent.putExtras(bundle);  
 			
             startActivity(intent);
+            AddMenu.this.finish();
 		}
 		
 	}
@@ -174,4 +216,42 @@ public class AddMenu extends ActionBarActivity{
 //		}
 //		
 //	}
+	
+
+	public void save(){
+		  try {
+			  if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+
+			         File sdCardDir = Environment.getExternalStorageDirectory();//获取SDCard目录
+
+			         File saveFile = new File(sdCardDir, "a.txt");
+
+			       FileOutputStream outStream = new FileOutputStream(saveFile,true);
+			       
+			   
+			       
+			       String string = new String(editText1.getText().toString().getBytes(), "GBK");
+			       String string2 = new String("$".getBytes(), "GBK");
+			       String string3 = new String(editText2.getText().toString().getBytes(), "GBK");
+			       String string4 = new String(spinner.getSelectedItem().toString().getBytes(), "GBK");
+	            
+	            outStream.write(string.getBytes());
+	            outStream.write(string2.getBytes());
+	            outStream.write(string3.getBytes());
+	            outStream.write(string2.getBytes());
+	            outStream.write(string4.getBytes());
+	            outStream.write('\n');
+	            
+	            outStream.close();
+	            Toast.makeText(AddMenu.this,"保存完成",Toast.LENGTH_LONG).show();
+			  }else {
+				  Toast.makeText(AddMenu.this,"SD卡发生错误",Toast.LENGTH_LONG).show();
+			}
+	        } catch (FileNotFoundException e) {
+	            return;
+	        }
+	        catch (IOException e){
+	            return ;
+	        }
+	}
 }

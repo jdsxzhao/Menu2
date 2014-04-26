@@ -57,7 +57,8 @@ public class MainActivity extends ActionBarActivity {
 			
 			Bundle bundle=new Bundle();  
             bundle.putString("name", "");  
-            bundle.putString("material","");  
+            bundle.putString("material",""); 
+            bundle.putInt("type", 0);
             intent.putExtras(bundle); 
 			startActivity(intent);
 //			MainActivity.this.finish();

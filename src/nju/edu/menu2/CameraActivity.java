@@ -23,6 +23,7 @@ public class CameraActivity extends Activity {
 	String name;
 	String material;
 	Bitmap bitmap;
+	int type;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class CameraActivity extends Activity {
 		Intent intent1 = getIntent();
 		name = intent1.getStringExtra("name");
 		material = intent1.getStringExtra("material");
+		type = intent1.getIntExtra("type", 0);
+		
 		
 		Log.i("name", name);
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -56,7 +59,7 @@ public class CameraActivity extends Activity {
 			FileOutputStream b = null;
 			File file = new File("/sdcard/myImage/");
 			boolean i = file.mkdirs();// 创建文件夹
-			String fileName = "/sdcard/myImage/111.jpg";
+			String fileName = "/sdcard/myImage/"+name+".jpg";
 
 			try {
 				b = new FileOutputStream(fileName);
@@ -75,7 +78,7 @@ public class CameraActivity extends Activity {
 
 			((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);// 将图片显示在ImageView里
 			Button button = (Button) findViewById(R.id.button);
-			Button button2 = (Button) findViewById(R.id.button1);
+			//Button button2 = (Button) findViewById(R.id.button1);
 			Button button3 = (Button) findViewById(R.id.button2);
 
 			button.setOnClickListener(new OnClickListener() {
@@ -91,7 +94,10 @@ public class CameraActivity extends Activity {
 		            bundle.putString("name", name);  
 		            Log.i("name", name);
 		            bundle.putString("material",material); 
+		            bundle.putInt("type", type);
+		            AddMenu.isloadPic = true;
 		            intent.putExtra("bitmap", bitmap);
+		           
 		            intent.putExtras(bundle);  
 		            
 					
@@ -104,20 +110,20 @@ public class CameraActivity extends Activity {
 				}
 			});
 
-			button2.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					
-					Intent intent = new Intent();
-					
-					intent.setClass(CameraActivity.this, MainActivity.class);
-					startActivity(intent);
-					// 如果不关闭当前的会出现好多个页面
-					CameraActivity.this.finish();
-				}
-			});
+//			button2.setOnClickListener(new OnClickListener() {
+//
+//				@Override
+//				public void onClick(View v) {
+//					// TODO Auto-generated method stub
+//					
+//					Intent intent = new Intent();
+//					
+//					intent.setClass(CameraActivity.this, MainActivity.class);
+//					startActivity(intent);
+//					// 如果不关闭当前的会出现好多个页面
+//					CameraActivity.this.finish();
+//				}
+//			});
 
 			button3.setOnClickListener(new OnClickListener() {
 
