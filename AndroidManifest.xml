@@ -59,6 +59,12 @@
             android:name="nju.edu.menu2.CameraActivity"
             android:label="@string/camera_name" >
         </activity>
+        
+        
+        <activity
+            android:name="nju.edu.menu2.Result"
+            android:label="@string/result" >
+        </activity>
     </application>
 
 </manifest>

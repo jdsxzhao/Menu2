@@ -1,6 +1,8 @@
 package nju.edu.menu2;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable{
 	private String name ;
 	private String material;
 	private String type;
