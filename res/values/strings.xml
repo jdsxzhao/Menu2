@@ -22,6 +22,10 @@
       <string name="textView2">拔丝地瓜</string>
        <string name="textView3">红烧排骨</string>
        
+       <string name="type1">炒菜</string>
+      <string name="type2">凉菜</string>
+       <string name="type3">汤</string>
+       
            <string name="type_prompt">菜品类别</string>
            <string-array name="type_array">
                <item>炒菜</item>
@@ -31,7 +35,7 @@
                
            </string-array>
 
-       <string name="chosenCount">0个热菜</string>
+       <string name="chosenCount">0个</string>
      
        
 </resources>

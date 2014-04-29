@@ -1,14 +1,24 @@
 package nju.edu.menu2;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+import org.apache.http.util.EncodingUtils;
+
 import nju.edu.menu2.MainActivity.ButtonListener;
 import nju.edu.menu2.MainActivity.TextViewListener;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,6 +29,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -128,8 +139,10 @@ public class AddMenu extends ActionBarActivity{
 			.show();
 			
 			
-			save();
-			AddMenu.this.finish();
+			save("b.txt");
+			//ArrayList<Dish> dishs = read("b.txt");
+			// Toast.makeText(AddMenu.this,dishs.get(0).getName(),Toast.LENGTH_LONG).show();
+			//AddMenu.this.finish();
 			
 			
 		}
@@ -218,28 +231,30 @@ public class AddMenu extends ActionBarActivity{
 //	}
 	
 
-	public void save(){
+	@SuppressLint("SdCardPath")
+	public void save(String path){
 		  try {
 			  if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
 
 			         File sdCardDir = Environment.getExternalStorageDirectory();//»ñÈ¡SDCardÄ¿Â¼
 
-			         File saveFile = new File(sdCardDir, "a.txt");
+			         File saveFile = new File("/data/data/nju.edu.menu2/files/"+path);
 
-			       FileOutputStream outStream = new FileOutputStream(saveFile,true);
+			       FileOutputStream out= new FileOutputStream(saveFile,true);
+			       Writer outStream = new OutputStreamWriter(out, "UTF-8");
 			       
 			   
 			       
-			       String string = new String(editText1.getText().toString().getBytes(), "GBK");
-			       String string2 = new String("$".getBytes(), "GBK");
-			       String string3 = new String(editText2.getText().toString().getBytes(), "GBK");
-			       String string4 = new String(spinner.getSelectedItem().toString().getBytes(), "GBK");
+			       String string = new String(editText1.getText().toString().getBytes(), "UTF-8");
+			       String string2 = new String(";".getBytes(), "UTF-8");
+			       String string3 = new String(editText2.getText().toString().getBytes(), "UTF-8");
+			       String string4 = new String(spinner.getSelectedItem().toString().getBytes(), "UTF-8");
 	            
-	            outStream.write(string.getBytes());
-	            outStream.write(string2.getBytes());
-	            outStream.write(string3.getBytes());
-	            outStream.write(string2.getBytes());
-	            outStream.write(string4.getBytes());
+	            outStream.write(string);
+	            outStream.write(string2);
+	            outStream.write(string3);
+	            outStream.write(string2);
+	            outStream.write(string4);
 	            outStream.write('\n');
 	            
 	            outStream.close();
@@ -253,5 +268,51 @@ public class AddMenu extends ActionBarActivity{
 	        catch (IOException e){
 	            return ;
 	        }
+	}
+	
+	@SuppressLint("SdCardPath")
+	public static ArrayList<Dish> read(String path){
+		ArrayList<Dish> dishs = new ArrayList<>();
+		//if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+			String strFileName = path;  
+			FileInputStream fis;
+			String res = ""; 
+			try {
+				//File file = new File(Environment.getExternalStorageDirectory(),path);
+				//FileInputStream fin = new FileInputStream(file);
+//				 FileInputStream fin = openFileInput(path); 
+//		            int length = fin.available(); 
+//		            byte[] buffer = new byte[length]; 
+//		            fin.read(buffer); 
+//		            res = EncodingUtils.getString(buffer, "GBK"); 
+//		            Log.i("read", res);
+//		            fin.close(); 
+				fis = new FileInputStream("/data/data/nju.edu.menu2/files/"+strFileName);
+				InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+				
+				
+				BufferedReader dataIO = new BufferedReader(isr);  
+				String strLine = null;  
+				while((strLine =  dataIO.readLine()) != null){ 
+					
+					String[] dishStrings = strLine.split(";"); 
+					Log.i("dish", strLine);
+					Dish dish = new Dish();
+					dish.setName(dishStrings[0]);
+					dish.setMaterial(dishStrings[1]);
+					dish.setType(dishStrings[2]);
+					dishs.add(dish);					
+				}  
+				dataIO.close();  
+				fis.close();  
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		//}
+	return dishs;	
 	}
 }

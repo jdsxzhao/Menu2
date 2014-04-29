@@ -1008,32 +1008,23 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050061;
+        public static final int action_settings=0x7f050058;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int button=0x7f05004e;
-        public static final int button1=0x7f050053;
-        public static final int button2=0x7f05004f;
+        public static final int button=0x7f05004f;
+        public static final int button1=0x7f050048;
+        public static final int button2=0x7f050050;
         public static final int camera=0x7f050044;
-        public static final int checkBox1=0x7f050056;
-        public static final int checkBox2=0x7f050057;
-        public static final int checkBox3=0x7f050058;
-        public static final int checkBox4=0x7f05005b;
-        public static final int checkBox5=0x7f05005c;
-        public static final int checkBox6=0x7f05005d;
-        public static final int checkBox7=0x7f05005e;
-        public static final int checkBox8=0x7f05005f;
-        public static final int checkBox9=0x7f050060;
         public static final int checkbox=0x7f05002d;
-        public static final int chosenView1=0x7f050059;
-        public static final int chosenView2=0x7f05005a;
+        public static final int chosenView1=0x7f050052;
+        public static final int chosenView2=0x7f050053;
         public static final int collapseActionView=0x7f05000d;
         public static final int container=0x7f05003c;
-        public static final int cursor=0x7f05004c;
-        public static final int datailUsing=0x7f050052;
+        public static final int cursor=0x7f05004d;
+        public static final int datailUsing=0x7f050055;
         public static final int default_activity_button=0x7f050028;
-        public static final int detailName=0x7f050051;
+        public static final int detailName=0x7f050054;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
         public static final int dropdown=0x7f05000f;
@@ -1048,8 +1039,8 @@ containing a value of this type.
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageView=0x7f050050;
-        public static final int linearLayout1=0x7f050048;
+        public static final int imageView=0x7f050051;
+        public static final int linearLayout1=0x7f050049;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
         public static final int middle=0x7f050012;
@@ -1080,12 +1071,12 @@ containing a value of this type.
         public static final int tabMode=0x7f050002;
         public static final int tableRow1=0x7f050045;
         public static final int tableRow2=0x7f050046;
-        public static final int text1=0x7f050049;
-        public static final int text2=0x7f05004a;
-        public static final int text3=0x7f05004b;
+        public static final int text1=0x7f05004a;
+        public static final int text2=0x7f05004b;
+        public static final int text3=0x7f05004c;
         public static final int textView1=0x7f050047;
-        public static final int textView2=0x7f050054;
-        public static final int textView3=0x7f050055;
+        public static final int textView2=0x7f050056;
+        public static final int textView3=0x7f050057;
         public static final int textView4=0x7f05003e;
         public static final int textView5=0x7f05003d;
         public static final int textView7=0x7f050042;
@@ -1093,7 +1084,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
-        public static final int vPager=0x7f05004d;
+        public static final int vPager=0x7f05004e;
         public static final int withText=0x7f05000c;
     }
     public static final class integer {
@@ -1151,13 +1142,14 @@ containing a value of this type.
         public static final int add_mian1=0x7f03001a;
         public static final int begin_work=0x7f03001b;
         public static final int camera_main=0x7f03001c;
-        public static final int detail=0x7f03001d;
-        public static final int fragment_main=0x7f03001e;
-        public static final int lay1=0x7f03001f;
-        public static final int lay2=0x7f030020;
-        public static final int lay3=0x7f030021;
-        public static final int linearlayout=0x7f030022;
-        public static final int support_simple_spinner_dropdown_item=0x7f030023;
+        public static final int count=0x7f03001d;
+        public static final int detail=0x7f03001e;
+        public static final int fragment_main=0x7f03001f;
+        public static final int lay1=0x7f030020;
+        public static final int lay2=0x7f030021;
+        public static final int lay3=0x7f030022;
+        public static final int linearlayout=0x7f030023;
+        public static final int support_simple_spinner_dropdown_item=0x7f030024;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1217,13 +1209,16 @@ containing a value of this type.
         public static final int button1=0x7f0a0017;
         public static final int button2=0x7f0a0018;
         public static final int camera_name=0x7f0a0014;
-        public static final int chosenCount=0x7f0a0021;
+        public static final int chosenCount=0x7f0a0024;
         public static final int close=0x7f0a001b;
         public static final int hello_world=0x7f0a0015;
         public static final int textView1=0x7f0a001d;
         public static final int textView2=0x7f0a001e;
         public static final int textView3=0x7f0a001f;
-        public static final int type_prompt=0x7f0a0020;
+        public static final int type1=0x7f0a0020;
+        public static final int type2=0x7f0a0021;
+        public static final int type3=0x7f0a0022;
+        public static final int type_prompt=0x7f0a0023;
     }
     public static final class style {
         /** 

@@ -6,53 +6,8 @@
     android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="锅包肉" />
-
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="拔丝地瓜" />
-
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="红烧排骨" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginTop="230dp"
-        android:background="#FFD700" >
 
 
-        <TextView
-            android:id="@+id/chosenView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="42dp"
-            android:text="您已经选择了："
-            android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/chosenView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/chosenView1"
-            android:layout_alignBottom="@id/chosenView1"
-            android:layout_toRightOf="@id/chosenView1"
-            android:text="@string/chosenCount"
-
-            android:textSize="22sp" />
-
-    </RelativeLayout>
 
 </LinearLayout>

@@ -5,22 +5,6 @@
   android:background="#FFFFFF"
     android:orientation="vertical" >
 
-    <CheckBox
-        android:id="@+id/checkBox7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="西红柿蛋汤" />
-
-    <CheckBox
-        android:id="@+id/checkBox8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="青菜豆腐汤" />
-
-    <CheckBox
-        android:id="@+id/checkBox9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="西湖牛肉羹" />
+  
 
 </LinearLayout>

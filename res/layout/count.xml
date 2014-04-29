@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    
+    
+        android:layout_height="0dp"
+      	android:layout_weight="1"
+        android:background="#FFD700" >
+    
+	 <TextView
+            android:id="@+id/chosenView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="42dp"
+            android:text="您已经选择了："
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/chosenView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/chosenView1"
+            android:layout_alignBottom="@id/chosenView1"
+            android:layout_toRightOf="@id/chosenView1"
+            android:text="@string/chosenCount"
+
+            android:textSize="22sp" />
+</RelativeLayout>

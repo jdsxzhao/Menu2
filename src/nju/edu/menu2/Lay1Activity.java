@@ -25,7 +25,7 @@ public class Lay1Activity extends ActionBarActivity{
 		setContentView(R.layout.lay1);
 		
 		
-		tv=(TextView)findViewById(R.id.chosenView1);
+		//tv=(TextView)findViewById(R.id.chosenView1);
 		 try{
 			    tv.setText("Hello testing");
 			    Log.i("Correct","No error");
@@ -37,9 +37,7 @@ public class Lay1Activity extends ActionBarActivity{
 			    }
 	
 	
-		checkBox1=(CheckBox)findViewById(R.id.checkBox1);
-		checkBox2=(CheckBox)findViewById(R.id.checkBox2);
-		checkBox3=(CheckBox)findViewById(R.id.checkBox3);
+
 		
 		CheckBoxListener listener=new CheckBoxListener();
 		

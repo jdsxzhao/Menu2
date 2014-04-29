@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nju.edu.menu2.Lay1Activity.CheckBoxListener;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -16,12 +17,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -35,16 +39,27 @@ public class BeginWork extends ActionBarActivity{
 	private int offset = 0;// 动画图片偏移量
 	private int currIndex = 0;// 当前页卡编号
 	 private int bmpW;// 动画图片宽度
-	 private TextView tv;
+	 private TextView tv1;
+	 private TextView tv2;
+	 private TextView tv3;
 	 
-		private CheckBox checkBox1;
-		private CheckBox checkBox2;
-		private CheckBox checkBox3;
+//		private CheckBox checkBox1;
+//		private CheckBox checkBox2;
+//		private CheckBox checkBox3;
+		CheckBoxListener1 listener1;
+		CheckBoxListener2 listener2;
+		CheckBoxListener3 listener3;
 	    
+	@SuppressLint("SdCardPath")
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.begin_work);
+		//需要添加checkbox的layout
+	
+		setContentView(R.layout.begin_work); 
 		
+		
+		
+	
 		InitImageView(); 
         InitTextView(); 
         InitViewPager(); 
@@ -80,34 +95,70 @@ public class BeginWork extends ActionBarActivity{
 		 mPager = (ViewPager) findViewById(R.id.vPager);
 		 listViews = new ArrayList<View>();
 		 LayoutInflater mInflater = getLayoutInflater();
-		 
 
-		 
-		 View layout1 = mInflater.inflate(R.layout.lay1,null);
-		 View layout2 = mInflater.inflate(R.layout.lay2,null);
-		 View layout3 = mInflater.inflate(R.layout.lay3,null);
-		 listViews.add(layout1);	
-		 listViews.add(layout2);
-		 listViews.add(layout3);
-		 mPager.setAdapter(new MyPagerAdapter(listViews));
-		 mPager.setCurrentItem(0);
-		 mPager.setOnPageChangeListener(new MyOnPageChangeListener());
+		 LinearLayout layout1 =(LinearLayout) mInflater.inflate(R.layout.lay1,null);		 
+		 LinearLayout layout2 = (LinearLayout)mInflater.inflate(R.layout.lay2,null);
+		 LinearLayout layout3 = (LinearLayout)mInflater.inflate(R.layout.lay3,null);
 
 //			intent.setClass(BeginWork.this, Lay1Activity.class);
 //			startActivity(intent);
 //		 
-		 	checkBox1=(CheckBox)layout1.findViewById(R.id.checkBox1);
-			checkBox2=(CheckBox)layout1.findViewById(R.id.checkBox2);
-			checkBox3=(CheckBox)layout1.findViewById(R.id.checkBox3);
+//		 	checkBox1=new CheckBox(layout2.getContext());
+//			checkBox2=(CheckBox)layout1.findViewById(R.id.checkBox2);
+//			checkBox3=new CheckBox(layout2.getContext());
+
+			listener1=new CheckBoxListener1();
+			listener2=new CheckBoxListener2();
+			listener3=new CheckBoxListener3();
+//			
+//			checkBox1.setOnCheckedChangeListener(listener);
+//			checkBox2.setOnCheckedChangeListener(listener);
+//			checkBox3.setOnCheckedChangeListener(listener);
 			
-			CheckBoxListener listener=new CheckBoxListener();
 			
-			checkBox1.setOnCheckedChangeListener(listener);
-			checkBox2.setOnCheckedChangeListener(listener);
-			checkBox3.setOnCheckedChangeListener(listener);
+			//LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.lay1, null); 
+			@SuppressWarnings("deprecation")
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+			ArrayList<CheckBox> checkBoxs = new ArrayList<>();
+//			checkBoxs.add(checkBox1);
+//			checkBoxs.add(checkBox2);
+//			checkBoxs.add(checkBox3);
+			ArrayList<Dish> dishs = AddMenu.read("b.txt");  //取出数据
+			for (Dish dish : dishs) {
+				
+					CheckBox checkBox = new CheckBox(this);
+					checkBox.setText(dish.getName());
+					if (dish.getType().equals("炒菜")) {
+						layout1.addView(checkBox);						
+						checkBox.setOnCheckedChangeListener(listener1);
+					}else if (dish.getType().equals("凉菜")) {
+						layout2.addView(checkBox);
+						checkBox.setOnCheckedChangeListener(listener2);
+					}else {
+						layout3.addView(checkBox);
+						checkBox.setOnCheckedChangeListener(listener3);
+					}
+					Log.i("add", checkBox.getText()+"");
+					
+			}
 			
-			tv = (TextView) layout1.findViewById(R.id.chosenView2);
+			RelativeLayout  relativeLayout1 = (RelativeLayout)mInflater.inflate(R.layout.count, null);
+			RelativeLayout  relativeLayout2 = (RelativeLayout)mInflater.inflate(R.layout.count, null);
+			RelativeLayout  relativeLayout3 = (RelativeLayout)mInflater.inflate(R.layout.count, null);
+			layout1.addView(relativeLayout1);
+			layout2.addView(relativeLayout2);
+			layout3.addView(relativeLayout3);
+			
+			tv1 = (TextView) relativeLayout1.findViewById(R.id.chosenView2);
+			tv2 = (TextView) relativeLayout2.findViewById(R.id.chosenView2);
+			tv3 = (TextView) relativeLayout3.findViewById(R.id.chosenView2);
 		 
+			listViews.add(layout1);	
+			listViews.add(layout2);
+			listViews.add(layout3);
+			mPager.setAdapter(new MyPagerAdapter(listViews));
+			mPager.setCurrentItem(0);
+			mPager.setOnPageChangeListener(new MyOnPageChangeListener());
 		
 	 }
 	 
@@ -201,20 +252,60 @@ public class BeginWork extends ActionBarActivity{
 	    } 
 	 
 	 
-	 private int count = 0;
+	 private int count1 = 0;
 	 
-	 class CheckBoxListener implements OnCheckedChangeListener{
+	 private int count2 = 0;
+	 private int count3 = 0;
+	 class CheckBoxListener1 implements OnCheckedChangeListener{
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				// TODO Auto-generated method stub
 				if(isChecked){
-					count++;
-					tv.setText(count+"个热菜");
+					count1++;
+					tv1.setText(count1+"个热菜");
 				}else{
-					count--;
-					tv.setText(count+"个热菜");
+					count1--;
+					tv1.setText(count1+"个热菜");
+				}
+			}
+
+			
+			
+		}
+	 
+	 class CheckBoxListener2 implements OnCheckedChangeListener{
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					count2++;
+					tv2.setText(count2+"个凉菜");
+				}else{
+					count2--;
+					tv2.setText(count2+"个凉菜");
+				}
+			}
+
+			
+			
+		}
+	 
+	 class CheckBoxListener3 implements OnCheckedChangeListener{
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				// TODO Auto-generated method stub
+				if(isChecked){
+					count3++;
+					tv3.setText(count3+"个汤");
+				}else{
+					count3--;
+					tv3.setText(count3+"个汤");
 				}
 			}
 
